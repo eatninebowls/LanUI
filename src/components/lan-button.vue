@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-
+// 支持点击、样式切换、outline、disabled、size、isCircle、loading 等常用功能的按钮组件
+// 后面可优化：图标可用户自行传入，可传入链接，颜色自定义
 // 定义 Props
 interface Props {
   variant?: "primary" | "secondary" | "danger" | "success"; // 按钮类型
@@ -64,15 +65,38 @@ const handleClick = () => {
 <template>
   <button
     @click="handleClick"
-    class="font-medium transition-colors"
+    class="font-medium transition-colors flex items-center justify-center  gap-2"
     :class="[
       variantClasses,
       sizeClasses,
-      props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+      props.disabled || props.loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
       props.isCircle ? 'rounded-full' : 'rounded-md',
     ]"
-    :disabled="props.disabled"
+    :disabled="props.disabled || props.loading"
   >
-    <slot>Default Button</slot>
+    <svg
+      v-if="props.loading"
+      class="animate-spin h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+    <slot v-if="!props.loading">Default Button</slot>
+    <slot v-else>Loading...</slot> <!-- 可选加载文字 -->
   </button>
 </template>
+<!-- 改组件用户亦可自行加工class实现样式变换比如border去除 -->
