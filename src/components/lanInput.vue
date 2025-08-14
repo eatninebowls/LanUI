@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-//该input组件实现了以下功能：
-//1.根据state状态动态切换样式
-//2.根据size大小动态切换样式
-//3.根据contentType类型动态切换样式
-//4.根据isRound是否圆角动态切换样式
-//5.根据disabled是否禁用动态切换样式
-//6.根据placeHolder提示语句动态切换样式
-//7.根据clearable是否可清空动态切换样式
-//8.根据searchable是否显示搜索图标动态切换样式
+
 interface Props {
   state?: 'normal' | 'wrong' | 'success'; // 添加成功状态
   placeHolder?: string;//默认提示语句
@@ -66,7 +58,11 @@ const sizeClasses=computed(()=>{
   <div class="relative">
   <!-- 图标容器（绝对定位） -->
   <div class="absolute inset-y-0  flex items-center pl-2 pointer-events-none" v-if="props.searchable">
-    <svg t="1753512640285" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12561" width="15" height="15"><path d="M1008.936719 939.925506l-219.315465-219.315465a443.346869 443.346869 0 1 0-69.669489 69.62087l219.315466 219.315466a49.249959 49.249959 0 0 0 69.669488-69.620871zM443.267147 788.675138a344.749715 344.749715 0 1 1 344.749715-344.749715 344.749715 344.749715 0 0 1-344.749715 344.749715z" fill="#515151" p-id="12562"></path></svg>
+    <slot>
+      <svg t="1753512640285" class="icon" viewBox="0 0 1024 1024"
+      version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="12561" width="15" height="15">
+      <path d="M1008.936719 939.925506l-219.315465-219.315465a443.346869 443.346869 0 1 0-69.669489 69.62087l219.315466 219.315466a49.249959 49.249959 0 0 0 69.669488-69.620871zM443.267147 788.675138a344.749715 344.749715 0 1 1 344.749715-344.749715 344.749715 344.749715 0 0 1-344.749715 344.749715z" fill="#515151" p-id="12562"></path></svg></slot>
   </div>
 
   <input
@@ -90,4 +86,3 @@ const sizeClasses=computed(()=>{
   />
   </div>
 </template>
-//后续优化思路：添加一键清空图标以及可选日期功能

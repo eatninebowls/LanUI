@@ -9,6 +9,10 @@
     },
     {
       "path": "./tsconfig.vitest.json"
-    }
-  ]
+    },
+  ],
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./.cache/.tsbuildinfo" // 自定义路径（可选）
+  }
 }
